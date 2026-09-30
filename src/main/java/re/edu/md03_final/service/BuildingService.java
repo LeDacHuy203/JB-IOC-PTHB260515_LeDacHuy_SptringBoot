@@ -101,7 +101,7 @@ public class BuildingService {
                 .start_date(request.getStart_date())
                 .time(request.getTime())
                 .time_unit(request.getTime_unit())
-                .status(request.getStatus())
+                .status(request.getStatus() == null ? (short) 1 : request.getStatus())
                 .build();
 
         buildingRepository.save(buildings);
