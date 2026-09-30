@@ -42,8 +42,5 @@ public interface BuildingRepository extends JpaRepository<Buildings, Long> {
             @Param("status") Short status,
             Pageable pageable
     );
-
-
-
 }
 

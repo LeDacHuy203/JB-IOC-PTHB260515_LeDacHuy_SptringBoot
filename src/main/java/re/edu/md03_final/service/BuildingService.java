@@ -138,16 +138,23 @@ public class BuildingService {
 
         if (file != null && !file.isEmpty()) {
             File uploadFolder = new File(UPLOAD_DIR);
+
             if (!uploadFolder.exists()) {
                 uploadFolder.mkdirs();
             }
 
             LocalDateTime now = LocalDateTime.now();
-            String dateString = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss"));
-            String filePath = uploadFolder.getAbsolutePath() + File.separator + dateString + "_" + file.getOriginalFilename();
+            String dateString = now.format(
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss")
+            );
+
+            String filePath = uploadFolder.getAbsolutePath()
+                    + File.separator
+                    + dateString + "_" + file.getOriginalFilename();
 
             file.transferTo(new File(filePath));
-            coverUrl = filePath;
+
+            buildings.setDesign(filePath);
         }
 
         buildings.setBuilding_name(request.getBuilding_name());
@@ -158,6 +165,7 @@ public class BuildingService {
         buildings.setStart_date(request.getStart_date());
         buildings.setTime(request.getTime());
         buildings.setTime_unit(request.getTime_unit());
+        buildings.setContent(request.getContent());
         buildingRepository.save(buildings);
 
         return BuildingResponseDTO.builder()

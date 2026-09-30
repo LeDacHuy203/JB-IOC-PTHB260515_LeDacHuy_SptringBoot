@@ -75,10 +75,10 @@ public class GlobalExceptionHandler {
             ComplieStatus ex
     ) {
         return ResponseEntity
-                .status(HttpStatus.OK)
+                .status(HttpStatus.BAD_REQUEST)
                 .body(
                         new ErrResponse(
-                                HttpStatus.OK.value(),
+                                HttpStatus.BAD_REQUEST.value(),
                                 ex.getMessage()
                         )
                 );
