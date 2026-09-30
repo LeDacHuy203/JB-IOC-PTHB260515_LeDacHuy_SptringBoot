@@ -8,6 +8,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import re.edu.md03_final.dto.response.ApiResponse;
 import re.edu.md03_final.dto.response.ErrResponse;
 
 
@@ -23,23 +24,27 @@ public class GlobalExceptionHandler {
     // =========================
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, String>> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
-        Map<String, String> error = new HashMap<>();
+    public ResponseEntity<ApiResponse<Object>> handleValidation(
+            MethodArgumentNotValidException ex
+    ) {
+        Map<String, String> errors = new HashMap<>();
 
-        ex.getFieldErrors().forEach(
-                fieldError -> {
-                    error.put(
-                            fieldError.getField(),
-                            fieldError.getDefaultMessage()
-                    );
-                }
+        ex.getFieldErrors().forEach(error ->
+                errors.put(
+                        error.getField(),
+                        error.getDefaultMessage()
+                )
         );
 
-        return ResponseEntity
-                .badRequest()
-                .body(error);
+        return ResponseEntity.badRequest()
+                .body(new ApiResponse<>(
+                        false,
+                        "Dữ liệu không hợp lệ",
+                        null,
+                        errors,
+                        HttpStatus.BAD_REQUEST.value()
+                ));
     }
-
 
     @ExceptionHandler(DuplicateBuildingNameException.class)
 //    @ResponseStatus(HttpStatus.CONFLICT)
