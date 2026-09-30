@@ -72,17 +72,4 @@ public class BuildingController {
     }
 
 
-//    @GetMapping("/search")
-//    public ResponseEntity<ApiResponse<PageResponse<BuildingResponseDTO>>> findBuildingName(
-//            @RequestParam(defaultValue = "0") int page,
-//            @RequestParam(defaultValue = "5") int size,
-//            @RequestParam(defaultValue = "id") String sortBy,
-//            @RequestParam(defaultValue = "ASC")
-//            Sort.Direction sortDir,
-//            @RequestParam(required = false)
-//            String building_name
-//    ) {
-//        PageResponse<BuildingResponseDTO> result = buildingService.getBuildingByName(page, size, sortBy, sortDir, building_name);
-//        return ResponseEntity.ok(new ApiResponse<>(true, "Lay du lieu thanh cong", result, null, 200));
-//    }
 }
