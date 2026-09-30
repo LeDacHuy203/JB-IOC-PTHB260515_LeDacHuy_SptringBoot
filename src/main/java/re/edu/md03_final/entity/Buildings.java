@@ -38,8 +38,8 @@ public class Buildings {
     @Column(nullable = false)
     private Integer time;
 
-    @Column(nullable = false)
-    private  String time_unit;
+    @Column(length = 10, nullable = false)
+    private String time_unit;
 
     @Column(nullable = false)
     private String design;

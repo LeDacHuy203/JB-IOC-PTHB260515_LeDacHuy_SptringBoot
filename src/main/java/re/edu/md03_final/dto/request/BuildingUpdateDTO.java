@@ -1,9 +1,6 @@
 package re.edu.md03_final.dto.request;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -49,6 +46,7 @@ public class BuildingUpdateDTO {
 
     @NotBlank(message = "Content khong duoc de trong")
     private String content;
-
+    @Min(value = 0, message = "Status phải từ 0 đến 2")
+    @Max(value = 2, message = "Status phải từ 0 đến 2")
     private Short status;
 }
